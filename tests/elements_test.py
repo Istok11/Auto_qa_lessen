@@ -1,4 +1,4 @@
-from pages.elements_page import TextBoxPage
+from pages.elements_page import CheckBoxPage, TextBoxPage
 import time
 
 
@@ -18,8 +18,19 @@ class TestElements:
 
 
 
-
-
             # input_data = text_box_page.fill_all_fields() #сокращенный вариант (не показывает где ошибка и менее понятен)
             # output_data = text_box_page.check_filled_form()
             # assert input_data == output_data
+
+
+    class TestCheck_box:
+        def test_check_box(self, driver):
+            check_box_page = CheckBoxPage(driver, 'https://demoqa.com/checkbox')
+            check_box_page.open()
+            check_box_page.open_full_list()
+            check_box_page.click_random_check_box()
+            input_checkbox = check_box_page.get_checked_checkboxes()
+            output_result = check_box_page.get_output_result()
+            print(input_checkbox)
+            print(output_result)
+            assert input_checkbox == output_result, 'checkboxes have not been selected'
